@@ -18,11 +18,14 @@ function App() {
   const fetchUserDetails = async()=>{
       const dataResponse = await fetch(SummaryApi.current_user.url,{
         method : SummaryApi.current_user.method,
-        credentials : 'include'
+        credentials : 'include',
+        headers: {          
+          'token': JSON.parse(localStorage.getItem("token"))
+        },
       })
 
       const dataApi = await dataResponse.json()
-
+      
       if(dataApi.success){
         dispatch(setUserDetails(dataApi.data))
       }
@@ -31,7 +34,10 @@ function App() {
   const fetchUserAddToCart = async()=>{
     const dataResponse = await fetch(SummaryApi.addToCartProductCount.url,{
       method : SummaryApi.addToCartProductCount.method,
-      credentials : 'include'
+      credentials : 'include',
+      headers: {          
+        'token': JSON.parse(localStorage.getItem("token"))
+      },
     })
 
     const dataApi = await dataResponse.json()
@@ -40,11 +46,17 @@ function App() {
   }
 
   useEffect(()=>{
-    /**user Details */
+    try {
+       /**user Details */
     fetchUserDetails()
-    /**user Details cart product */
+       /**user Details cart product */
     fetchUserAddToCart()
 
+    } catch (error) {
+      console.error(error);
+    }
+   
+   
   },[])
   return (
     <>

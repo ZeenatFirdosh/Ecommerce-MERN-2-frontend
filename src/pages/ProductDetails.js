@@ -39,7 +39,8 @@ const ProductDetails = () => {
     const response = await fetch(SummaryApi.productDetails.url,{
       method : SummaryApi.productDetails.method,
       headers : {
-        "content-type" : "application/json"
+        "content-type" : "application/json",
+        "token": JSON.parse(localStorage.getItem("token")),
       },
       body : JSON.stringify({
         productId : params?.id

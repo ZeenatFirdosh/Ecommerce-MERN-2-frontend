@@ -25,7 +25,10 @@ const Header = () => {
   const handleLogout = async() => {
     const fetchData = await fetch(SummaryApi.logout_user.url,{
       method : SummaryApi.logout_user.method,
-      credentials : 'include'
+      credentials : 'include',
+      headers: {          
+        'token': JSON.parse(localStorage.getItem("token"))
+      },
     })
 
     const data = await fetchData.json()
@@ -33,6 +36,7 @@ const Header = () => {
     if(data.success){
       toast.success(data.message)
       dispatch(setUserDetails(null))
+      localStorage.setItem("token",null);
       navigate("/")
     }
 

@@ -26,7 +26,8 @@ const CategoryProduct = () => {
       const response = await fetch(SummaryApi.filterProduct.url,{
         method : SummaryApi.filterProduct.method,
         headers : {
-          "content-type" : "application/json"
+          "content-type" : "application/json",
+          "token": JSON.parse(localStorage.getItem("token")),
         },
         body : JSON.stringify({
           category : filterCategoryList
