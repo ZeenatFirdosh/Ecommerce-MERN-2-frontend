@@ -7,10 +7,7 @@ const uploadImage  = async(image) => {
     
 
     const dataResponse = await fetch(url,{
-        method : "post",
-        headers: {          
-            'token': JSON.parse(localStorage.getItem("token"))
-          },
+        method : "post",      
         body : formData
     })
 
