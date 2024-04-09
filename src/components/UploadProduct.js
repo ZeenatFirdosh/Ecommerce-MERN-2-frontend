@@ -72,7 +72,8 @@ const UploadProduct = ({
       method : SummaryApi.uploadProduct.method,
       credentials : 'include',
       headers : {
-        "content-type" : "application/json"
+        "content-type" : "application/json",
+        "token": JSON.parse(localStorage.getItem("token")),
       },
       body : JSON.stringify(data)
     })
